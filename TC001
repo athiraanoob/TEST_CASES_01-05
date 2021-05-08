@@ -1,0 +1,52 @@
+package package_Name;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class sel {
+
+	public static void main(String[] args) {
+		char[] v = {};
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver=new ChromeDriver();
+		driver.navigate().to("http://iarchtaps.com:8080/opentaps/control/main");
+		driver.findElement(By.id("username")).sendKeys("DemoSalesManager");;
+		driver.findElement(By.id("password")).sendKeys("crmsfa");;
+		driver.findElement(By.className("decorativeSubmit")).click();
+		driver.findElement(By.linkText("CRM/SFA")).click();
+        driver.findElement(By.linkText("Leads")).click();
+        driver.findElement(By.linkText("Create Lead")).click();
+        driver.findElement(By.id("createLeadForm_companyName")).sendKeys("MyCompany");
+        driver.findElement(By.id("createLeadForm_firstName")).sendKeys("Athi");
+        driver.findElement(By.id("createLeadForm_lastName")).sendKeys("Anoob");
+        WebElement wb= driver.findElement(By.name("dataSourceId"));
+        Select dd1=new Select(wb);
+        dd1.selectByIndex(4);
+        WebElement wb1=driver.findElement(By.id("createLeadForm_marketingCampaignId"));
+        Select obj1=new Select(wb1);
+        obj1.selectByVisibleText("Demo Marketing Campaign");
+        obj1.selectByIndex(5);
+        obj1.selectByValue("CATRQ_CAMPAIGNS");
+        driver.findElement(By.id("createLeadForm_primaryPhoneNumber")).sendKeys("456389870");
+        driver.findElement(By.id("createLeadForm_primaryEmail")).sendKeys("aaa@gmail.com");
+        driver.findElement(By.name("submitButton")).click();
+        String str=driver.findElement(By.id("viewLead_companyName_sp")).getText();
+        System.out.println("Id : "+stringCheck(str));
+       // driver.manage().timeouts().implicitlyWait(Duration.ofseconds(30));
+        driver.quit();
+        
+        }
+	public static String stringCheck(String str){
+		int start = str.indexOf('(');
+		int end = str.indexOf(')');
+		String val = str.substring(start+1, end);
+	//	System.out.println("Value : "+val);
+		return val;
+	}
+}
