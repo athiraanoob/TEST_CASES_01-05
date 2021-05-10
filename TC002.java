@@ -61,5 +61,6 @@ public class TC002 {
        }
       // driver.findElement(By.linkText("10221")).click();
 	}
+	driver.quit();
 
 }
