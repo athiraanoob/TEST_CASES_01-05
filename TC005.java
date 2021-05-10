@@ -48,6 +48,7 @@ public class TC005 {
         {
         	System.out.println("This is the duplicate of same company");
         }
+	driver.quit();	
         
 
 	}
