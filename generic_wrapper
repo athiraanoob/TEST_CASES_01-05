@@ -1,0 +1,90 @@
+package generic_Base;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.google.common.base.CaseFormat;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Genericwrapper {
+
+	
+		public RemoteWebDriver driver;
+		public void BrowserLaunch(String brows,String Url)
+		{
+			if(brows.equalsIgnoreCase("Chrome"))
+			{
+				WebDriverManager.chromedriver().setup();
+				driver=new ChromeDriver();
+            }
+			else if(brows.equalsIgnoreCase("edge"))
+			{
+				WebDriverManager.edgedriver().setup();
+				//EdgeDriver driver= new EdgeDriver();
+				driver=new EdgeDriver();
+            }
+			driver.navigate().to(Url);
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		}
+		public WebElement identify(String type1,String locator1)
+		{
+			 WebElement wb;
+		  if(type1.toLowerCase().equals("id"))
+		  {
+			wb=driver.findElement(By.id(locator1));
+			return wb;
+		  }
+		  if(type1.toLowerCase().equals("name"))
+		  {
+			  wb=driver.findElement(By.name(locator1));
+			  return wb;
+		  }
+			if(type1.toLowerCase().equals("class"))
+			{
+				wb=driver.findElement(By.className(locator1));
+				return wb;
+			}
+			if(type1.toLowerCase().equals("link"))
+			{
+				wb=driver.findElement(By.linkText(locator1));
+				return wb;
+			}
+			if(type1.toLowerCase().equals("partiallink"))
+			{
+				wb=driver.findElement(By.partialLinkText(locator1));
+				return wb;
+			}
+			if(type1.toLowerCase().equals("xpath"))
+			{
+				wb=driver.findElement(By.xpath(locator1));
+				return wb;
+			}
+			if(type1.toLowerCase().equals("tagname"))
+			{
+				wb=driver.findElement(By.tagName(locator1));
+				return wb;
+			}
+			else
+			{
+			return null;
+			}
+		}
+		public void enterval(WebElement wb,String aa)
+		{
+			
+			wb.sendKeys(aa);
+			
+		}
+		public void cli(WebElement ww)
+		{
+			ww.click();
+		}
+
+		}
